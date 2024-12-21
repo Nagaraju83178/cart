@@ -1,0 +1,76 @@
+<div class="container p-block">
+  <div class="head-conent d-flex align-items-center justify-content-between">
+    <h1>Products List</h1>
+    <div class="dropdown d-sm-block d-md-none">
+      <button
+        class="btn btn-success dropdown-toggle d-flex align-items-center gap-2"
+        type="button"
+        id="categoryDropdown"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <i class="ri-apps-line"></i>
+        Categories
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+        <li *ngFor="let cat of categories" (click)="onCategorySelect(cat.name)">
+          <a class="dropdown-item">{{ cat.name }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-3 col-lg-4 col-md-4">
+      <div class="p-cat-box d-md-block d-none">
+        <h1>Categories</h1>
+        <ul class="l-c">
+          <li
+            *ngFor="let cat of categories"
+            (click)="onCategorySelect(cat.name)"
+          >
+            <div class="category-list">
+              <!-- <img
+                [src]="cat.icon"
+                [alt]="cat.name"
+              /> -->
+              <h5>
+                <a>{{ cat.name }}</a>
+              </h5>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xl-9 col-lg-8 col-md-8 col-sm-12">
+      <div class="p-ls">
+        <div class="row gy-3 gx-2">
+          <div class="col-lg-4 col-md-6 col-6" *ngFor="let product of products">
+            <div class="pd">
+              <a class="a-img" (click)="onProductSelect(product.id)">
+                <img [src]="product.img" />
+              </a>
+              <div class="pd-div">
+                <p>{{ product.name }}</p>
+                <span>1kg</span>
+                <span
+                  >Price: <b>{{ product.price }}</b></span
+                >
+                <ngb-rating [rate]="3" />
+              </div>
+              <div class="input-group flex-nowrap">
+                <button class="btn btn-1" type="button" (click)="decreaseCartValue(product)">-</button>
+                <button class="btn btn-block w-100" type="button" (click)="addToCart(product)">
+                  Add To Cart
+                </button>
+                <button class="btn btn-1" type="button"  (click)="increaseCartValue(product)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12" *ngIf="products.length == 0">
+            <h1>No Products Avialble</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
